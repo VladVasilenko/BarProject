@@ -14,4 +14,8 @@ use App\Http\Controllers\BarController;
 |
 */
 
-Route::get('/', [BarController::class,'index']);
+Route::get('/', [BarController::class,'index'])->middleware('auth')->name('bar');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
