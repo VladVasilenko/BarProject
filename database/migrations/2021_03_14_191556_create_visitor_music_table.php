@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePeopleMusicTable extends Migration
+class CreateVisitorMusicTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatePeopleMusicTable extends Migration
      */
     public function up()
     {
-        Schema::create('people_music', function (Blueprint $table) {
-            $table->unsignedBigInteger('people_id');
+        Schema::create('visitor_music', function (Blueprint $table) {
+            $table->unsignedBigInteger('visitor_id');
             $table->unsignedBigInteger('music_id');
-            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ class CreatePeopleMusicTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people_music');
+        Schema::dropIfExists('visitor_music');
     }
 }

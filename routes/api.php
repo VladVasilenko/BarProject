@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/bars/{bar}',[\App\Http\Controllers\API\BarController::class,'barStatus']);
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('/bar', [BarController::class, 'barStatus']);
 });
+

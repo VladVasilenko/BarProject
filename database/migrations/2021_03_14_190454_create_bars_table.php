@@ -16,8 +16,7 @@ class CreateBarsTable extends Migration
         Schema::create('bars', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('music_id')->nullable();
-            $table->timestamps();
+            $table->unsignedInteger('music_id')->nullable();
         });
     }
 

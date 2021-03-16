@@ -1,20 +1,22 @@
 <h1>Информация о баре </h1>
 <p>Название: {{$bar->name}}</p>
 <p>Жанр музыки: {{$bar->music->name}}</p>
-<p>Кол-во человек в баре: {{count($peoples)}}</p>
+<p>Кол-во человек в баре: {{$bar->visitors->count()}}</p>
 <h2>Список посетителей:</h2>
 <table>
     <thead>
-    <th>Имя</th>
-    <th>Жанры</th>
-    <th>Что делает</th>
+    <tr>
+        <th>Имя</th>
+        <th>Жанры</th>
+        <th>Что делает</th>
+    </tr>
     </thead>
     <tbody>
-    @foreach($peoples as $people)
+    @foreach($bar->visitors as $visitor)
         <tr>
-            <td>{{$people->name}}</td>
-            <td>{{implode(',',$people->musics->pluck('name')->toArray())}}</td>
-            <td>{{$people->action}}</td>
+            <td>{{$visitor->name}}</td>
+            <td>{{implode(',',$visitor->musics->pluck('name')->toArray())}}</td>
+            <td>{{$visitor->getActionName($bar)}}</td>
         </tr>
     @endforeach
     </tbody>

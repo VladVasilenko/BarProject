@@ -2,24 +2,24 @@
 
 namespace Database\Factories;
 
-use App\Models\People;
+use App\Models\Visitor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PeopleFactory extends Factory
+class VisitorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = People::class;
+    protected string $model = Visitor::class;
 
     /**
      * Define the model's default state.
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name' => $this->faker->name,

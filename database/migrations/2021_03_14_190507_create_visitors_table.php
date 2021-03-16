@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarPeopleTable extends Migration
+class CreateVisitorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateBarPeopleTable extends Migration
      */
     public function up()
     {
-        Schema::create('bar_people', function (Blueprint $table) {
-            $table->unsignedBigInteger('bar_id');
-            $table->unsignedBigInteger('people_id');
-            $table->timestamps();
+        Schema::create('visitors', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedInteger('bar_id');
+            $table->string('name');
         });
     }
 
@@ -27,6 +27,6 @@ class CreateBarPeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bar_people');
+        Schema::dropIfExists('visitors');
     }
 }
