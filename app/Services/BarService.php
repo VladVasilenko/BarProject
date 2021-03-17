@@ -21,8 +21,7 @@ class BarService
      */
     public static function create(int $music, int $visitorsCount) : Bar
     {
-        $bar = Bar::factory()->create();
-        $bar->update(['music_id' => $music]);
+        $bar = Bar::factory()->create(['music_id' => $music]);
 
         /** @var  Visitor[] $visitors */
         $visitors = Visitor::factory()
