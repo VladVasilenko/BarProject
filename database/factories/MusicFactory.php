@@ -12,7 +12,7 @@ class MusicFactory extends Factory
      *
      * @var string
      */
-    protected string $model = Music::class;
+    protected $model = Music::class;
 
     /**
      * Define the model's default state.

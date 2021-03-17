@@ -12,7 +12,7 @@ class BarFactory extends Factory
      *
      * @var string
      */
-    protected string $model = Bar::class;
+    protected $model = Bar::class;
 
     /**
      * Define the model's default state.

@@ -12,7 +12,7 @@ class VisitorFactory extends Factory
      *
      * @var string
      */
-    protected string $model = Visitor::class;
+    protected $model = Visitor::class;
 
     /**
      * Define the model's default state.
