@@ -16,8 +16,7 @@ class BarController extends Controller
     public function barStatus() : JsonResponse
     {
         /** @var Bar $bar */
-        $bar = Bar::with('visitors')
-            ->with('music')
+        $bar = Bar::with('visitors.musics','music')
             ->orderBy('id', 'desc')
             ->firstOrFail();
 

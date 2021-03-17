@@ -7,56 +7,206 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Тестовое задание "Бар"
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+----------
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Начало
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Данная инструкция написана для linux-систем (Ubuntu как пример)
 
-## Learning Laravel
+## Требования к системе:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Веб-сервер apache2 либо любой другой 
+- php v7.4 или выше
+- СУБД MySql либо любая другая
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Все это можно назвать LAMP
 
-## Laravel Sponsors
+Комплект LAMP — это набор программного обеспечения с открытым исходным кодом, 
+которое обычно устанавливается в комплексе для размещения на сервере динамических сайтов 
+и веб-приложений, написанных на PHP. Этот термин представляет собой аббревиатуру.
+Операционная система Linux используется с веб-сервером Apache. 
+Данные сайта хранятся в базе данных MySQL, 
+а за обработку динамического контента отвечает PHP.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Инструкция по установке и настройке LAMP [здесь](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-20-04-ru)
 
-### Premium Partners
+## Установка
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+Пожалуйста, прочтите официальное руководство по установке laravel, прежде чем начать. [Официальное руководство](https://laravel.com/docs/8.x/installation)
 
-## Contributing
+Склонируйте репозиторий
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    git clone git@github.com:VladVasilenko/BarProject.git
 
-## Code of Conduct
+Перейдите в папку проекта
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    cd BarProject
 
-## Security Vulnerabilities
+Установите все зависимости, используя composer
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    composer install
 
-## License
+Скопируйте пример файла env и внесите необходимые изменения конфигурации в файл .env.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    cp .env.example .env
+
+Сгенерируйте новый ключ приложения
+
+    php artisan key:generate
+
+Запустите миграцию базы данных (**Установите соединение с базой данных в .env перед миграцией**)
+
+    php artisan migrate
+
+Сборка фронтенда (Laravel Mix)
+
+    npm install && npm run development
+
+**TL;DR Список команд**
+
+    git clone git@github.com:VladVasilenko/BarProject.git
+    cd BarProject
+    composer install
+    cp .env.example .env
+    php artisan key:generate
+
+**Убедитесь, что вы верно сконфигурировали переменные окружения согласно вашей базы данных перед запуском миграции** [Переменные среды](#переменные-среды)
+
+    php artisan migrate
+
+## Заполнение базы данных
+
+**Заполните базу данных исходными данными, которые включают тестового пользователя и жанры музыки.**
+
+Запустите команду для наполнения базы данных данными
+
+    php artisan db:seed
+
+***Примечание*** : Рекомендуется иметь чистую базу данных перед заполнением. Вы можете обновить свои миграции в любой момент, чтобы очистить базу данных, выполнив следующую команду
+
+    php artisan migrate:refresh
+
+## API Спецификация
+
+Это приложение имеет REST API для получения текущего состояния бара с его посетителями
+
+    Пример api-запроса : https://host/api/bar?api_token=5of1CgNeLd8gMdkKoBUxzfn3mbdukBWkPU7rwF2l8hDBZFa196CAdF31vP1VfzmkCwfZkZENjL42LAaU
+
+***Примечание*** : Api был сделан на "скорую руку" с опущением соблюдения требований безопасности и токен хранится в открытом виде для демонстрации функционала. 
+
+
+----------
+
+# Code overview
+
+## Папки
+
+- `app/Models` - Содержит все модели Eloquent
+- `app/Http/Controllers/Api` - Содержит Api контроллер
+- `app/Services` - Содержит сервис для обработки логики бара
+- `database/factories` - Содержит фабрику моделей для всех моделей
+- `database/migrations` - Содержит все миграции базы данных
+- `database/seeds` - Содержит seeds базы данных
+- `routes` - Содержит все маршруты приложения
+
+## Переменные среды
+
+- `.env` - В этом файле можно установить переменные среды
+
+***Примечание***: Вы можете задать информацию о базе данных и другие переменные в этом файле, и приложение будет полностью работать.
+
+----------
+
+# Тестирование API
+
+Состояние бара можно получить по адресу
+
+    https://host/api/bar?api_token=5of1CgNeLd8gMdkKoBUxzfn3mbdukBWkPU7rwF2l8hDBZFa196CAdF31vP1VfzmkCwfZkZENjL42LAaU
+
+***Примечание***: api_token задан в seed Пользователя и хранится в открытом виде для демонстрации функционала. Правильное использование api_token описано в [официальной документации](https://laravel.com/docs/6.x/api-authentication)
+
+##Пример ответа сервера
+
+```json
+{
+    "id": 1,
+    "name": "ut",
+    "music_id": 1,
+    "visitors": [
+        {
+            "id": 1,
+            "bar_id": 1,
+            "name": "Dr. Ulises Wolf",
+            "action_name": "Пьет",
+            "musics": [
+                {
+                    "id": 2,
+                    "name": "Поп",
+                    "pivot": {
+                        "visitor_id": 1,
+                        "music_id": 2
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "Джаз",
+                    "pivot": {
+                        "visitor_id": 1,
+                        "music_id": 3
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "Электро",
+                    "pivot": {
+                        "visitor_id": 1,
+                        "music_id": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "bar_id": 1,
+            "name": "Prof. Cathryn Lesch MD",
+            "action_name": "Танцует",
+            "musics": [
+                {
+                    "id": 1,
+                    "name": "Рок",
+                    "pivot": {
+                        "visitor_id": 4,
+                        "music_id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "Джаз",
+                    "pivot": {
+                        "visitor_id": 4,
+                        "music_id": 3
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "Электро",
+                    "pivot": {
+                        "visitor_id": 4,
+                        "music_id": 5
+                    }
+                }
+            ]
+        }
+    ],
+    "music": {
+        "id": 1,
+        "name": "Рок"
+    }
+}
+```
+
+
+
+
